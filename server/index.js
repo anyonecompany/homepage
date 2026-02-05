@@ -71,8 +71,12 @@ app.post('/api/request-demo', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-  console.error('ERROR: Server failed to start:', err);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  }).on('error', (err) => {
+    console.error('ERROR: Server failed to start:', err);
+  });
+}
+
+module.exports = app;
